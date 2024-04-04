@@ -12,7 +12,7 @@ def main():
     print(translate(usr_input))
 
 
-print(translate("I'm number 1 !"))
-print(translate("I love bubble tea."))
-print(translate("I have 1 bubble tea."))
+print(translate("Get to 1 !"))
+print(translate("I like bubble tea."))
+print(translate("I ove 1 bubble tea."))
 main()
