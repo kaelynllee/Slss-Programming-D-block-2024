@@ -4,14 +4,17 @@
 
 def stars(num_stars : int) -> str:
     """Returns a given number of *"""
-    return "*" * num_stars
-value = ""
 
-if num_stars == 0 or num_stars == 1:
-    value = "*"
-elif num_stars > 1:
-else: 
-return value 
+    value = ""
+
+    if num_stars == 0 or num_stars == 1:
+        value = "*"
+    elif num_stars > 1:
+        value ="*" * num_stars
+    else:
+        value = "sorry, can't take negative numbers."
+
+    return value
 # # Multiply Strings 
 # greeting = "hello"
 # print(greeting * 1_000_000)
