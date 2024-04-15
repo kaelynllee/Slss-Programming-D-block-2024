@@ -34,25 +34,12 @@ print(pokemon_one.type)
 
 
 pokemon_two = Pokemon()
-def __init__(self):
-        """A special method (function) called the constructor.
-          Contains all the properties/variables that descirbe a Pokemon."""
-        self.name = ""
-        self.id = 0 
-        self.weight = 0 
-        self.height = 0 
-        self.type = "normal"
-        print("Another new Pokemon is born!")
-# Create two pokemon using our class 
-pokemon_two = Pokemon()
 
 # change its name 
-print(pokemon_two.name)
 pokemon_two.name = "Evie"
-print(pokemon_two.name)
-
 pokemon_two.id = 4 
 pokemon_two.type = "water"
 
+print(pokemon_two.name)
 print(pokemon_two.id)
 print(pokemon_two.type)
