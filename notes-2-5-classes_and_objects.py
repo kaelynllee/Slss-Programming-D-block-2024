@@ -14,17 +14,35 @@ class Pokemon: # use a capital letter for class name
         self.weight = 0 
         self.height = 0 
         self.type = "normal"
+        self.actual_cry= "Rooooooooooar!"
         
         
         print("A new Pokemon is born!")
+    def cry(self) -> str: 
+       return f'{self.name} says, "{self.actual_cry}"'
+    
+    def eat(self, food: str) -> str:
+        """Represents feeding the pokemon 
+        ParamL 
+        - food: what food you feed it 
+        Return: 
+        - what it says after consuming it"""
+        if food.lower() == "berry":
+          return f"{self.name} ate the berry and says \"YUM"
+        elif food.lower() == "potion":
+            return f"{self.name} consumed the potion and feels healthier!"
+        else:
+            return f"{self.name} batted the {food} away."
+          
+          
+        
 
-# Create two pokemon using our class 
+
 pokemon_one = Pokemon()
-
 # change its name 
 print(pokemon_one.name)
 pokemon_one.name = "Pikachu"
-print(pokemon_one.name) # Pikachu 
+print(pokemon_one.name)
 
 pokemon_one.id = 25 
 pokemon_one.type = "electric"
@@ -32,14 +50,25 @@ pokemon_one.type = "electric"
 print(pokemon_one.id)
 print(pokemon_one.type)
 
-
 pokemon_two = Pokemon()
 
-# change its name 
-pokemon_two.name = "Evie"
-pokemon_two.id = 4 
-pokemon_two.type = "water"
+pokemon_two.name = "Eevee"
+pokemon_two.id = 133
+pokemon_two.type = "Vaporeon"
 
 print(pokemon_two.name)
 print(pokemon_two.id)
 print(pokemon_two.type)
+
+pokemon_one.actual_cry = "pikachu"
+pokemon_two.actual_cry = "graahh"
+
+print(pokemon_one.cry())
+print(pokemon_two.cry())
+
+print(pokemon_one.eat("berry"))
+print(pokemon_one.eat("potion"))
+print(pokemon_one.eat("poison"))  # mr. ubial does not condone
+print(pokemon_two.eat("berry"))
+print(pokemon_two.eat("potion"))
+print(pokemon_two.eat("poison")) 
