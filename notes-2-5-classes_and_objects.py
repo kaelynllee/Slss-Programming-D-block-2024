@@ -36,12 +36,26 @@ class Pokemon: # use a capital letter for class name
           
   # Create a new child class of Pokemon 
 class Pikachu(Pokemon): 
-  def __init__(self):
+  def __init__(self, name ="Pikachu"):
         # call constructor of parent class
-        suoer().__init__()       
+        super().__init__()
         
+        self.name = name 
+        self.id = 25
+        self.type = "electric"
+        self.actual_cry = "pikachu"
+  def thundershock(self,defender: Pokemon)-> str:
 
+    """Simulate a thundershock attack agaist antoehr pokemon
+    Params:
+    - defender: defending pokemon
+    Reutnrs: 
+    Str representing result of attack"""
+    response = f"{self.name} used thundershock on {defender}"
 
+    if defender.type.lower() in ["water", "flying"]:
+        response = response + "it was super effective."
+        return response 
 pokemon_one = Pokemon()
 # change its name 
 print(pokemon_one.name)
@@ -76,3 +90,14 @@ print(pokemon_one.eat("poison"))  # mr. ubial does not condone
 print(pokemon_two.eat("berry"))
 print(pokemon_two.eat("potion"))
 print(pokemon_two.eat("poison")) 
+
+pikachu_one = Pikachu()
+pikachu_two = Pikachu("speedy")
+
+print(pikachu_one.name)
+print(pikachu_two.name)
+print(pikachu_one.cry())
+print(pikachu_two.eat("potion"))
+
+print(pikachu_one.thundershock(pokemon_one))
+print(pikachu_two.thundershock(pokemon_two))
