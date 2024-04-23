@@ -100,4 +100,27 @@ print(pikachu_one.cry())
 print(pikachu_two.eat("potion"))
 
 print(pikachu_one.thundershock(pokemon_one))
-print(pikachu_two.thundershock(pokemon_two))
+print(pikachu_two.thundershock(pokemon_two)) 
+
+class Charmander(Pokemon):
+    def __init__(self, name= "Charmander"):
+        super().__init__()
+        self.name = name
+        self.id = 133
+        self.type = "normal" 
+        self.actual_cry = "dannayee"
+
+    def Swift(self, defender: Pokemon) -> str:
+       """normal type attack"""
+       
+       response = f"{self.name} used swift on {defender.name}."
+
+       if defender.type.lower() in ["ghost"]:
+            response = response + " It was super effective!"
+
+       elif defender.type.lower() in ["Rock", "steel"]:
+            response = response + " It was not very effective."
+       
+       return response
+       
+    
