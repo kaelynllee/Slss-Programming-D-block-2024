@@ -18,6 +18,10 @@ class Dvdlogo(pygame.sprite.Sprite):
         self.image = pygame.image.load("images/dvd-logo.png")
         
         self.rect = self.image.get_rect()
+
+        # Veloctiy of Dvd logo
+        self.vel_x = 3 
+        self.vel_y = 3 
                
 def start():
     """Environment Setup and Game Loop"""
@@ -46,6 +50,8 @@ def start():
     pygame.display.set_caption("DVD Logo Screensaver")
 
     dvdlogo = Dvdlogo()
+    dvdlogo.rect.centerx = WIDTH // 2
+    dvdlogo.rect.centery = HEIGHT // 2
 
     all_sprites = pygame.sprite.Group()
     
@@ -57,6 +63,11 @@ def start():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 done = True
+        # UPdate the location of dvdlogo
+        # dvdlogo.rect.x + dvdlogol.vel_x
+        dvdlogo.rect.x = dvdlogo.rect.x + dvdlogo.vel_x 
+        dvdlogo.rect.y + dvdlogo.vel_y
+        print(dvdlogo.rect.x, dvdlogo.rect.y)
 
         # --- Update the world state
 
