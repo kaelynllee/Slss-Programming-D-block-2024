@@ -15,13 +15,10 @@ class Dvdlogo(pygame.sprite.Sprite):
     """Represents DVD logo sprite"""
     def __init__(self):
         super().__init__()
-        self.image = pygame.image.load("images/dvd-logo.png/dvd-logo.png")
+        self.image = pygame.image.load("images/dvd-logo.png")
         
         self.rect = self.image.get_rect()
-
-
-
-
+               
 def start():
     """Environment Setup and Game Loop"""
 
@@ -73,6 +70,7 @@ def start():
 
         # --- Tick the Clock
         clock.tick(60)  # 60 fps
+        
 
 
 def main():
