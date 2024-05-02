@@ -12,28 +12,38 @@ WIDTH = 1280
 HEIGHT = 720
 TITLE = "Snowscape"
 
-NUM_SNOW = 100
+NUM_SNOW = 50
 
 
 class Snow(pg.sprite.Sprite):
     def __init__(self, width: int):
-        """
-        Params:
-            width: width of snow in px
-        """
+    
         super().__init__()
 
         self.image = pg.Surface((width,width))
 
         pg.draw.circle(self.image, WHITE, (width// 2, width // 2), width // 2)
+        self.image.set_colorkey(BLACK)
 
         self.rect = self.image.get_rect()
 
         # Initial coords
-        self.rect.centerx = WIDTH // 2
-        self.rect.centery = HEIGHT // 2
+        self.rect.centerx = random.randrange(0, WIDTH + 1)
+        self.rect.centery = random.randrange(0, HEIGHT)
 
+        self.vel_y = random.randrange(3, 7)
+    
+    
+    def update(self):
+        # Take the y position and add the velocity to it
+        self.rect.centery += self.vel_y
 
+        # if the y position is greater than HEIGHT, set it back to 0
+        if self.rect.y > HEIGHT:
+            self.rect.y = 0
+            self.rect.y = random.randrange(0, HEIGHT) 
+           
+     
 def main():
     pg.init()
 
@@ -46,10 +56,14 @@ def main():
     done = False
     clock = pg.time.Clock()
 
+    background = pg.image.load("./images/cloud.png")
+    background = pg.transform.scale(background, (WIDTH, HEIGHT))
+
+
     # Create a snow sprites group
     snow_sprites = pg.sprite.Group()
-
-    snow_sprites.add(Snow(10))
+    for _ in range(NUM_SNOW):
+        snow_sprites.add(Snow(12))
 
     # ----- MAIN LOOP
     while not done:
@@ -63,16 +77,17 @@ def main():
 
         # ----- RENDER
         screen.fill(BLACK)
+        screen.blit(background, (0, -(background.get_height() // 2)))
 
         # Draw all the sprite groups
         snow_sprites.draw(screen)
+        
 
         # ----- UPDATE DISPLAY
         pg.display.flip()
         clock.tick(60)
 
     pg.quit()
-
 
 def random_coords():
     x, y = (random.randrange(0, WIDTH), random.randrange(0, HEIGHT))
