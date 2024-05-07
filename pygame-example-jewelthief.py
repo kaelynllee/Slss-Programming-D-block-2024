@@ -26,7 +26,6 @@ GOOMBA_IMAGE = pg.transform.scale(
 )
 
 
-
 class Player(pg.sprite.Sprite):
     # TODO: Change Mario image depending on facing direction
     def __init__(self):
