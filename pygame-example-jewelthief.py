@@ -30,15 +30,30 @@ class Player(pg.sprite.Sprite):
     # TODO: Change Mario image depending on facing direction
     def __init__(self):
         super().__init__()
-
-        self.image = pg.image.load("mario.webp")
-
+        
+        self.images = [
+        pg.image.load("mario.webp"),
+        pg.transform.flip(pg.image.load("mario.webp"), True, False),
+        ]
+        
+        self.image = self.images[0]
         self.rect = self.image.get_rect()
+        
+        self.lives_remaining = 9
+
+        self.facing = 0  # 0 is right, 1 is left
 
     def update(self):
         """Updates the location of sprite to the mouse cursor"""
-        self.rect.centerx = pg.mouse.get_pos()[0]
-        self.rect.centery = pg.mouse.get_pos()[1]
+        next_pos = pg.mouse.get_pos()
+
+        if self.rect.centerx > next_pos[0]:
+            self.facing = 1
+        elif self.rect.centerx < next_pos[0]:
+            self.facing = 0
+
+        self.rect.center = next_pos
+        self.image = self.images[self.facing]
 
 
 class Coin(pg.sprite.Sprite):
@@ -97,6 +112,9 @@ def start():
 
     score = 0
 
+    font = pg.font.SysFont("Didot", 24)
+
+
     # All sprites go in this sprite Group
     all_sprites = pg.sprite.Group()
 
@@ -120,7 +138,7 @@ def start():
         all_sprites.add(enemy)
         enemy_sprites.add(enemy)
 
-    pg.display.set_caption("Jewel Thief Clone (Don't sue us Nintendo)")
+    pg.display.set_caption("Jewel Thief Clone")
 
     # --Main Loop--
     while not done:
@@ -148,11 +166,28 @@ def start():
                 coin = Coin()
                 all_sprites.add(coin)
                 coin_sprites.add(coin)
+            
+        enemies_collided = pg.sprite.spritecollide(player, enemy_sprites, False) 
+            
+        for enemy in enemies_collided: 
+               
+                player.lives_remaining -= 1 / 60
+                
+                print(f"Lives: {int(player.lives_remaining)}")
+         # TODO : iterate  throuth enemies colided 
 
         # --- Draw items
-        screen.fill(WHITE)
+        screen.fill(EMERALD)
 
         all_sprites.draw(screen)
+
+        # create image that has the score in it 
+        score_image = font.render(f"Score: {score}", True, WHITE)
+        lives_image = font.render(f"Lives: {int(player.lives_remaining)}", True, RED)
+        
+        screen.blit(score_image, (5, 5))
+        screen.blit(lives_image, (5, 35))
+        # draw the image on the screen
 
         # Update the screen with anything new
         pg.display.flip()
